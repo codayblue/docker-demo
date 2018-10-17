@@ -1,0 +1,20 @@
+version: '3'
+volumes:
+  dbvolume:
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:80
+    volumes:
+      - ./app:/var/www
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - dbvolume:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: superSecret
